@@ -1,0 +1,25 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<div class="container">
+    <h1>Events:</h1>
+    {% if not events %}
+
+    <p>No events yet!</p>
+
+    {% else %} {# if events #}
+
+    <ul style="height:2000px">
+        {% for event in events %}
+        <li>
+            <a href="{{ url_for('event_page', id=event.id) }}">
+                {{ event.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% endif %} {# events #}
+
+</div>
+
+{% endblock %}

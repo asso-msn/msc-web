@@ -1,0 +1,21 @@
+<div class="file-field input-field">
+    {% if submission %}
+    <p>Last file upload: {{ submission.file.updated_at }}</p>
+    <p>
+        <a href="">Download</a>
+    </p>
+    {% else %}
+    <div class="required">Required</div>
+    {% endif %}
+    <div class="btn">
+        <span>Select archive</span>
+        <input type="file" name="file">
+    </div>
+    <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+    </div>
+    <p class="notes">
+        Files allowed for this event: {{ event.allowed_extensions |
+        join(',') }}
+    </p>
+</div>

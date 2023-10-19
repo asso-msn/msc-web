@@ -1,0 +1,23 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+<div class="container">
+    <p>
+        You are
+        {% if not submission %}
+        uploading a new submission to
+        {% else %} {# if submission #}
+        editing an existing submission for
+        {% endif %} {# submission #}
+        {{ event.name }}
+    </p>
+
+    <form method="post" enctype="multipart/form-data">
+        {% include "_submission_form_file.html.j2" %}
+        <div class="center">
+            <input type="submit" value="Upload" class="btn">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

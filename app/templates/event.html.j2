@@ -1,0 +1,29 @@
+{% extends "base.html.j2" %}
+{% block content %}
+<div class="container">
+    <div class="action-bar">
+        <a href="{{ url_for('event_edit', id=event.id) }}" class="btn">Edit</a>
+    </div>
+    <pre>
+        {{ event.__dict__|e }}
+    </pre>
+    <p>
+        Event {{ event.name }}
+    </p>
+    {% if event.description %}
+    <p>
+        {{ event.description }}
+    </p>
+    {% endif %}
+    {% if event.user %}
+    <p>
+        Presented by {{ event.user }}
+    </p>
+    {% endif %}
+    <div class="center">
+        <a href="{{ url_for('upload_form', event_id=event.id)}}"
+            class="btn">Submit a
+            chart!</a>
+    </div>
+</div>
+{% endblock %}

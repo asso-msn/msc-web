@@ -1,0 +1,74 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+<div class="container">
+    <h1>Editing {{ event.name }}</h1>
+    <form method="post" class="row">
+        <!-- name -->
+        <div class="input-field col s12">
+            <input type="text" name="name" id="name" value="{{ event.name }}">
+            <label for="name">Name</label>
+        </div>
+        <!-- description -->
+        <div class="input-field col s12">
+            <textarea name="description" id="description"
+                class="materialize-textarea">{{ event.description }}</textarea>
+            <label for="description">Description</label>
+        </div>
+        <!-- date -->
+        <div class="inputs-group row">
+            <!-- start -->
+            <div class="input-field col s6">
+                <input class="datepicker" type="text" name="start_date"
+                    id="start_date" value="{{ event.start_date }}">
+                <label for="start_date">Start date</label>
+            </div>
+            <!-- end -->
+            <div class="input-field col s6">
+                <input class="datepicker" type="text" name="end_date"
+                    id="end_date" value="{{ event.end_date }}">
+                <label for="end_date">End date</label>
+            </div>
+        </div>
+        <!-- options -->
+        <div class="inputs-group row">
+            <!-- is public -->
+            <div class="input-field col s4">
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" name="is_public" id="is_public"
+                            {% if event.is_public %}checked{% endif %}>
+                        <span class="lever"></span>
+                        <span>Public</span>
+                    </label>
+                    <p>
+                        Makes the event visible to everyone.
+                    </p>
+                </div>
+            </div>
+            <!-- is active -->
+            <div class="input-field col s4">
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" name="is_active" id="is_active"
+                            {% if event.is_active %}checked{% endif %}>
+                        <span class="lever"></span>
+                        <span>Active</span>
+                    </label>
+                </div>
+                <p>
+                    Allows new submissions to be made.
+                </p>
+            </div>
+        </div>
+        <div class="center">
+            <input type="submit" value="Save" class="btn">
+        </div>
+        <p class="center">
+            <a href="{{ url_for('event_page', id=event.id)}}">
+                Discard and go back to event page
+            </a>
+        </p>
+    </form>
+</div>
+{% endblock %}
