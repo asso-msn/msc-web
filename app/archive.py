@@ -61,6 +61,7 @@ class SDVXArchive(ArchiveExtender):
                 }
                 for chart in charts
             ],
+            "illustration": charts[0].jacket,
         }
 
     def handle_ksh(self, path: Path):
@@ -142,6 +143,6 @@ def extract(
         extender.on_end(tmp_output)
         shutil.rmtree(to, ignore_errors=True)
         to.parent.mkdir(parents=True, exist_ok=True)
-        tmp_output.rename(to)
+        shutil.move(tmp_output, to)
     result["extended_attributes"] = extender.attributes
     return result

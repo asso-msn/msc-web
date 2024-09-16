@@ -10,3 +10,6 @@ class User(Base):
     username: Column[str]
 
     submissions = relationship("Submission", back_populates="author")
+
+    def __str__(self):
+        return self.username

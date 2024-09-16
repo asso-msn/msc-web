@@ -20,10 +20,26 @@
         Presented by {{ event.user }}
     </p>
     {% endif %}
+    <p class="center">
+        Event is currently open!
+    </p>
     <div class="center">
         <a href="{{ url_for('upload_form', event_id=event.id)}}"
             class="btn">Submit a
             chart!</a>
     </div>
+
+    {% for submission in event.submissions %}
+    <p>
+        {{ submission.name }}
+    </p>
+    {% if submission.illustration %}
+    <p>
+        <img src="{{ url_for('submission_file', event_id=submission.event_id, submission_id=submission.id) }}?path={{ submission.illustration }}"
+            height="100" width="100 ">
+
+    </p>
+    {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}

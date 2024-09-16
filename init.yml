@@ -1,0 +1,9 @@
+events:
+  msc2:
+    name: Make Some Charts 2
+    description: Voltex Charting Event 2023
+    # start_date: 2023-12-01
+    # end_date:
+    type: sdvx
+users:
+  - Tina

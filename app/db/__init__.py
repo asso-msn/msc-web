@@ -4,7 +4,7 @@ from typing import Iterator
 
 import sqlalchemy as sa
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, Session, declared_attr
+from sqlalchemy.orm import DeclarativeBase, Session, declared_attr, joinedload
 
 from app import config
 
@@ -68,10 +68,17 @@ connection = Database()
 session = connection.session
 
 
-def get(table, *id):
+def get(table, *id, load=None):
+    options = []
+    if load:
+        if not isinstance(load, list):
+            load = [load]
+        load = [getattr(table, x) if isinstance(x, str) else x for x in load]
+        for column in load:
+            options.append(joinedload(column))
     with connection.session() as s:
         try:
-            obj = s.get(table, id)
+            obj = s.get(table, id, options=options)
         except sa.exc.NoResultFound:
             raise Exception(f"No {table} {id}")  # TODO: make this a 404
     return obj

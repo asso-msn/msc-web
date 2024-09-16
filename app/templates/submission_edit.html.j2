@@ -1,15 +1,30 @@
 {% extends "base.html.j2" %}
+{% block content %}
 <div class="container">
+    <pre>
+        {{ submission.__dict__ }}
+    </pre>
+    <p>
+        Editing {{ submission.name }} by {{ submission.author }} for {{
+        event.name }}
+    </p>
     <form method="post">
         <div class="input-field col s12">
-            <input type="text" name="song_name" id="song_name"
-                value="{{ submission.song_name }}">
-            <label for="song_name">Song title</label>
+            <input type="text" name="song_title" id="song_title"
+                value="{{ submission.title }}">
+            <label for="song_title">Song title</label>
         </div>
 
         <div class="input-field col s12">
-            <input type="text" name="song_artist" id="song_artist">
+            <input type="text" name="song_artist" id="song_artist"
+                value="{{ submission.artist }}">
             <label for="song_artist">Song artist</label>
+        </div>
+
+        <div class="input-field col s12">
+            <input type="text" name="song_illustration" id="song_illustration"
+                value="{{ submission.illustration }}">
+            <label for="song_illustration">Song illustration</label>
         </div>
 
         <div class="center">
@@ -17,4 +32,11 @@
                 else 'Save' }}" class="btn">
         </div>
     </form>
+    {% if submission.illustration %}
+    <p>
+        <img src="{{ url_for('submission_file', event_id=submission.event_id, submission_id=submission.id) }}?path={{ submission.illustration }}"
+            height="300" width="300">
+    </p>
+    {% endif %}
 </div>
+{% endblock %}
